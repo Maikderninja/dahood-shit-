@@ -29,6 +29,9 @@ end
 
 -- // Allows for custom
 function Settings.AimLockPosition(workspace.CurrentCamera.ViewportSize.X / 2, workspace.CurrentCamera.ViewportSize.Y / 2)
+    local Position = CameraMode and AimingSelected.Part.Position or AimingSelected.Position
+    return Position, {}
+end
 
 -- // Focuses a player
 local Backup = {table.unpack(AimingSettingsIgnoredPlayers)}
