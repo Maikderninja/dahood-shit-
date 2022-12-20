@@ -467,12 +467,6 @@ Section4:NewTextBox("yaw value", "hvh vibes", function(value)
 CustomYaw_Value = value
 end)
 
-  Section4:NewButton("Anti aim", "haha hvh vibes", function()
-    local spin = Instance.new('BodyAngularVelocity', game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart'))
-spin.AngularVelocity = Vector3.new(0, math.random(-60000, 55000), 0)
-spin.MaxTorque = Vector3.new(0, 35000, 0)
-end)
-
 Section4:NewButton("Infinite jump", "Fly fly haha", function()
 -- Created By Zorkel
 -- Instances:
