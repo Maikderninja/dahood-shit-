@@ -1,9 +1,4 @@
 local AntiAim_Toggle = false
-local AntiAim_Speed = 0
-local Pitch_Type = nil
-local Yaw_Type = nil
-local CustomPitch_Value = 0
-local CustomYaw_Value = 0
 
 local JNHHGaming = Instance.new("ScreenGui")
 local TextLabel = Instance.new("TextButton")
@@ -442,30 +437,7 @@ Section4:NewToggle("Bunnyhop", "Haha cs source vibes", function(K)
   and J do game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Jump = true
    end
     end)
-end)
-
-Section4:NewToggle("Anti aim", "hvh vibes", function(value)
-AntiAim_Toggle = value
-end)
-
-Section4:NewTextBox("Anti aim speed", "hvh vibes", function(value)
-AntiAim_Speed = value
-end)
-
-Section4:NewDropdown("Pitch type", "hvh vibes", {"Custom", "Up", "Down", "Zero"}, function(value)
-Pitch_Type = text
-end)
-
-Section4:NewTextBox("Pitch value", "hvh vibes", function(value)
-CustomPitch_Value = value / 100
-end)
-
-Section4:NewDropdown("Yaw type", "hvh vibes", {"Custom", "Jitter", "Spin", "Back"}, function(value)
-  Yaw_Type = value
-
-Section4:NewTextBox("yaw value", "hvh vibes", function(value)
-CustomYaw_Value = value
-end)
+  end)
 
   Section4:NewButton("Anti aim", "haha hvh vibes", function()
     local spin = Instance.new('BodyAngularVelocity', game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart'))
@@ -519,29 +491,3 @@ end)
 Section5:NewButton("Copy discord invite link", "Copies the discord invite link to clipboard (JOIN!!!!)", function()
     setclipboard("https://discord.gg/rQEHvHFGNf")
 end)
-
-if AntiAim_Toggle then
-       if Yaw_Type == "Custom" then
-           characterrotate(CFrame.new(CustomYaw_Value, 0, 0))
-       elseif Yaw_Type == "Jitter" then
-           if game.Players.LocalPlayer.Character then
-               game.Players.LocalPlayer.Character:WaitForChild("Humanoid").AutoRotate = false
-               local spin = Instance.new('BodyAngularVelocity', game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart'))
-               spin.AngularVelocity = Vector3.new(0, math.random(-60000, 55000), 0)
-               spin.MaxTorque = Vector3.new(0, 35000, 0)
-               wait()
-               spin:Destroy()
-           end
-       elseif Yaw_Type == "Spin" then
-           if game.Players.LocalPlayer.Character then
-               game.Players.LocalPlayer.Character:WaitForChild("Humanoid").AutoRotate = false
-               local spin = Instance.new('BodyAngularVelocity', game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart'))
-               spin.AngularVelocity = Vector3.new(0, AntiAim_Speed * 100, 0)
-               spin.MaxTorque = Vector3.new(0, 23000, 0)
-               wait()
-               spin:Destroy()
-           end
-       elseif Yaw_Type == "Back" then
-           characterrotate((workspace.CurrentCamera.CFrame * backrotation).p)
-       end
-   end
