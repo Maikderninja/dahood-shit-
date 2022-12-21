@@ -429,13 +429,6 @@ Section4:NewTextBox("Walkspeed", "Changes the player's walkspeed", function(spee
         end
 end)
 
-Section4:NewTextBox("Walkspeed", "Changes the player's walkspeed", function(jump)
-	while true do
-        wait()
-        game.Players.LocalPlayer.Character.Humanoid.JumpPower = 
-        end
-end)
-
 local J = false;
 Section4:NewToggle("Bunnyhop", "Haha cs source vibes", function(K)
   J = K;
@@ -446,10 +439,14 @@ Section4:NewToggle("Bunnyhop", "Haha cs source vibes", function(K)
     end)
   end)
 
-  Section4:NewButton("Anti aim", "haha hvh vibes", function()
-    local spin = Instance.new('BodyAngularVelocity', game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart'))
-spin.AngularVelocity = Vector3.new(0, math.random(-60000, 55000), 0)
-spin.MaxTorque = Vector3.new(0, 35000, 0)
+Section4:NewToggle("Anti aim", "haha hvh vibes", function(value)
+    if value then
+        local spin = Instance.new('BodyAngularVelocity', game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart'))
+            spin.AngularVelocity = Vector3.new(0, math.random(-60000, 55000), 0)
+            spin.MaxTorque = Vector3.new(0, 35000, 0)
+    else
+        print("coming soon")
+    end
 end)
 
 Section4:NewButton("Infinite jump", "Fly fly haha", function()
