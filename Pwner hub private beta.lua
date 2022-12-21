@@ -1,61 +1,5 @@
 local AntiAim_Toggle = false
 
-local JNHHGaming = Instance.new("ScreenGui")
-local TextLabel = Instance.new("TextButton")
-local UIGradient = Instance.new("UIGradient")
-local TextLabel_2 = Instance.new("TextLabel")
-local UIGradient_2 = Instance.new("UIGradient")
-local UITextSizeConstraint = Instance.new("UITextSizeConstraint")
-local UITextSizeConstraint_2 = Instance.new("UITextSizeConstraint")
-
-JNHHGaming.Name = "JNHHGaming"
-JNHHGaming.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-JNHHGaming.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
-JNHHGaming.ResetOnSpawn = false
-
-TextLabel.Parent = JNHHGaming
-TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.BackgroundTransparency = 1.000
-TextLabel.BorderSizePixel = 0
-TextLabel.Position = UDim2.new(-0.000772226602, 0, 0.0343558267, 0)
-TextLabel.Size = UDim2.new(0.170134634, 0, 0.0700389072, 0)
-TextLabel.Font = Enum.Font.GothamBold
-TextLabel.Text = "Made by"
-TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel.TextScaled = true
-TextLabel.TextSize = 28.000
-TextLabel.TextWrapped = true
-TextLabel.TextXAlignment = Enum.TextXAlignment.Left
-TextLabel.MouseButton1Down:Connect(function()
-	print("Hi")
-end)
-
-UIGradient.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(126, 0, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(209, 0, 0))}
-UIGradient.Parent = TextLabel
-
-TextLabel_2.Parent = TextLabel
-TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel_2.BackgroundTransparency = 1.000
-TextLabel_2.BorderSizePixel = 0
-TextLabel_2.Position = UDim2.new(-0.000772226602, 0, 0.67410934, 0)
-TextLabel_2.Size = UDim2.new(1, 0, 1, 0)
-TextLabel_2.Font = Enum.Font.GothamBold
-TextLabel_2.Text = "Maik"
-TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextLabel_2.TextScaled = true
-TextLabel_2.TextSize = 24.000
-TextLabel_2.TextWrapped = true
-TextLabel_2.TextXAlignment = Enum.TextXAlignment.Left
-
-UIGradient_2.Color = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(126, 0, 0)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(209, 0, 0))}
-UIGradient_2.Parent = TextLabel_2
-
-UITextSizeConstraint.Parent = TextLabel_2
-UITextSizeConstraint.MaxTextSize = 24
-
-UITextSizeConstraint_2.Parent = TextLabel
-UITextSizeConstraint_2.MaxTextSize = 27
-
 -- Gui to Lua
 -- Version: 3.2
 
@@ -433,7 +377,7 @@ local J = false;
 Section4:NewToggle("Bunnyhop", "Haha cs source vibes", function(K)
   J = K;
   spawn(function()
-  while wait()
+  while wait(0.5)
   and J do game.Players.LocalPlayer.Character:WaitForChild("Humanoid").Jump = true
    end
     end)
@@ -441,10 +385,11 @@ Section4:NewToggle("Bunnyhop", "Haha cs source vibes", function(K)
 
 Section4:NewToggle("Anti aim", "haha hvh vibes", function(value)
     if value then
-        local spin = Instance.new('BodyAngularVelocity', game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart'))
-            spin.AngularVelocity = Vector3.new(0, math.random(-60000, 55000), 0)
-            spin.MaxTorque = Vector3.new(0, 35000, 0)
-            game:GetService("Players")["LocalPlayer"].PlayerGui.GUI.Client.Variables.thirdperson.Value = true
+        game:GetService("Players")["LocalPlayer"].PlayerGui.GUI.Client.Variables.thirdperson.Value = true
+
+local spin = Instance.new('BodyAngularVelocity', game.Players.LocalPlayer.Character:FindFirstChild('HumanoidRootPart'))
+spin.AngularVelocity = Vector3.new(0, math.random(-60000, 55000), 0)
+spin.MaxTorque = Vector3.new(0, 35000, 0)
     else
         game:GetService("Players")["LocalPlayer"].PlayerGui.GUI.Client.Variables.thirdperson.Value = false
     end
