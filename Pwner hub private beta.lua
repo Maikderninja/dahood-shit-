@@ -1,4 +1,6 @@
 local AntiAim_Toggle = false
+local ArmChams = false
+local ArmChams_Color = Color3.new(50, 50, 50)
 
 local JNHHGaming = Instance.new("ScreenGui")
 local TextLabel = Instance.new("TextButton")
@@ -71,6 +73,7 @@ Toggle.Name = "Toggle"
 Toggle.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 Toggle.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 Toggle.DisplayOrder = 999999998
+Toggle.ResetOnSpawn = false
 
 Frame.Parent = Toggle
 Frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
@@ -374,6 +377,14 @@ Section2:NewButton("Chams", "Chams yes", function()
         end
 end)
 
+Section2:NewToggle("Arm chams", "Arm chams", function(value)
+  local ArmChams = value
+end)
+
+Section:NewColorPicker("Arm chams color", "Arm chams color", Color3.fromRGB(50,50,50), function(value)
+  ArmChams_Color = value
+end)
+
 Section2:NewToggle("Third person", "third person yes", function(value)
   if value then
   game:GetService("Players")["LocalPlayer"].PlayerGui.GUI.Client.Variables.thirdperson.Value = true
@@ -381,14 +392,6 @@ game:GetService('Players').LocalPlayer.DevEnableMouseLock = true
 else
 game:GetService("Players")["LocalPlayer"].PlayerGui.GUI.Client.Variables.thirdperson.Value = false
 game:GetService('Players').LocalPlayer.DevEnableMouseLock = false
-end
-end)
-
-Section2:NewToggle("Fly", "Im da biggest bird", function(value)
-  if value then
-  print("true")
-else
-print("false")
 end
 end)
 
@@ -507,3 +510,25 @@ end)
 Section5:NewButton("Copy discord invite link", "Copies the discord invite link to clipboard (JOIN!!!!)", function()
     setclipboard("https://discord.gg/rQEHvHFGNf")
 end)
+
+if ArmChams then
+       if not workspace.Camera:FindFirstChild("Arms") then
+           wait()
+       else
+           for i,v in pairs(workspace.Camera.Arms:GetDescendants()) do
+               if v.Name == 'Right Arm' or v.Name == 'Left Arm' then
+                   if v:IsA("BasePart") then
+                       v.Material = Enum.Material[ArmMaterial]
+                       v.Color = ArmChams_Color
+                   end
+               elseif v:IsA("SpecialMesh") then
+                   if v.TextureId == '' then
+                       v.TextureId = 'rbxassetid://0'
+                       v.VertexColor = convert_rgb_to_vertex(ArmChams_Color)
+                   end
+               elseif v.Name == 'L' or v.Name == 'R' then
+                   v:Destroy()
+               end
+           end
+       end
+   end
