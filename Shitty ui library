@@ -1,0 +1,97 @@
+--// UI Library
+
+--// Services
+local UIS = game:GetService("UserInputService")
+
+--// Variables
+local Library = {}
+
+--// Functions
+function Library:CreateTab(text)
+    local Tab = {}
+    Tab.Text = text or "Tab"
+    Tab.Buttons = {}
+    return Tab
+end
+
+function Library:CreateButton(text, callback)
+    local Button = {}
+    Button.Text = text or "Button"
+    Button.Callback = callback or function() end
+    return Button
+end
+
+function Library:CreateToggle(text, callback)
+    local Toggle = {}
+    Toggle.Text = text or "Toggle"
+    Toggle.State = false
+    Toggle.Callback = callback or function() end
+    return Toggle
+end
+
+function Library:CreateUI(title)
+    local UI = {}
+    UI.Title = title or "UI"
+    UI.Tabs = {}
+    UI.Visible = false
+
+    --// UI Objects
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.Name = UI.Title
+    ScreenGui.ResetOnSpawn = false
+
+    local MainFrame = Instance.new("Frame")
+    MainFrame.Name = "MainFrame"
+    MainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
+    MainFrame.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    MainFrame.BorderColor3 = Color3.fromRGB(27, 42, 53)
+    MainFrame.BorderSizePixel = 2
+    MainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+    MainFrame.Size = UDim2.new(0, 400, 0, 300)
+    MainFrame.Draggable = true
+
+    local Title = Instance.new("TextLabel")
+    Title.Name = "Title"
+    Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+    Title.BackgroundTransparency = 1
+    Title.Position = UDim2.new(0, 10, 0, 10)
+    Title.Size = UDim2.new(0, 100, 0, 20)
+    Title.Font = Enum.Font.SourceSansBold
+    Title.Text = UI.Title
+    Title.TextColor3 = Color3.fromRGB(27, 42, 53)
+    Title.TextSize = 14
+    Title.TextXAlignment = Enum.TextXAlignment.Left
+
+    --// Functions
+    function UI:AddTab(tab)
+        table.insert(self.Tabs, tab)
+    end
+
+    function UI:Show()
+        self.Visible = true
+        ScreenGui.Parent = game:GetService("CoreGui")
+    end
+
+    function UI:Hide()
+        self.Visible = false
+        ScreenGui.Parent = nil
+    end
+
+    --// Input Handling
+    UIS.InputBegan:Connect(function(input, processed)
+        if input.KeyCode == Enum.KeyCode.End then
+            UI.Visible = not UI.Visible
+            ScreenGui.Enabled = UI.Visible
+        end
+    end)
+
+    --// Construction
+    Title.Parent = MainFrame
+
+    ScreenGui.Parent = game:GetService("CoreGui")
+    MainFrame.Parent = ScreenGui
+
+    return UI
+end
+
+return Library
